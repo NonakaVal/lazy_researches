@@ -1,0 +1,179 @@
+/* Reset básico */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 8px 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+/* Language switcher styles */
+#language-switcher {
+    background-color: #f0f0f0;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.language-switcher {
+    list-style-type: none;
+}
+
+.language-switcher li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.language-switcher li a {
+    color: #080808;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.language-switcher li a:hover {
+    background-color: #ddd;
+}
+
+main {
+    padding: 20px 0;
+}
+
+#introduction {
+    background-color: #f0f0f0;
+    padding: 5px 0;
+    text-align: left;
+}
+
+#introduction h1 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+#articles {
+    padding: 40px 0;
+    margin-top: -3%;
+}
+
+#articles h2 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+#articles-list {
+    list-style-type: none;
+}
+
+#articles-list li {
+    margin-bottom: 3px;
+}
+
+#articles-list a {
+    display: inline-block;
+    color: #080808;
+    text-decoration: underline;
+    transition: background-color 0.3s ease;
+    padding: 1px;
+}
+
+#articles-list a:hover {
+    background-color: #d6d2d2;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 10px;
+    }
+
+    nav ul {
+        text-align: left;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    nav ul li a {
+        padding: 10px 0;
+    }
+
+    #introduction h1 {
+        font-size: 1.5rem;
+    }
+
+    #articles h2 {
+        font-size: 1.3rem;
+    }
+
+    #articles-list a {
+        font-size: 1rem;
+    }
+
+    #language-switcher {
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    nav ul {
+        text-align: center;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 5px 0;
+    }
+
+    nav ul li a {
+        padding: 5px 0;
+    }
+
+    #introduction h1 {
+        font-size: 1rem;
+    }
+
+    #articles h2 {
+        font-size: 1rem;
+    }
+
+    #articles-list a {
+        font-size: 0.9rem;
+    }
+
+    #language-switcher {
+        padding: 10px 0;
+    }
+}

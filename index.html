@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Researches</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Removed the language switcher from here -->
+        </nav>
+    </header>
+    <main>
+        <section id="introduction">
+            <div class="container">
+                <h1>Repositório pessoal de pesquisas com IA</h1>
+                <p>Site criado em 10 minutos para publicar os resultados de algumas pesquisas que fiz usando <a href="https://github.com/NonakaVal/lazy_research">lazy research</a>.</p>
+            </div>
+        </section>
+        <section id="language-switcher">
+            <div class="container">
+                <ul class="language-switcher">
+                    <li><a href="#" onclick="changeLanguage('pt')">Português</a></li>
+                    <li><a href="#" onclick="changeLanguage('en')">English</a></li>
+                </ul>
+            </div>
+        </section>
+        <section id="articles">
+            <div class="container">
+                <ul id="articles-list">
+                    <!-- Os links para os artigos serão gerados dinamicamente via script -->
+                </ul>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
