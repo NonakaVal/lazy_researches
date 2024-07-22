@@ -105,10 +105,17 @@ main {
 
 #filters {
     margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #filters label {
     margin-right: 10px;
+}
+
+#filters select {
+    margin-bottom: 10px;
 }
 
 
@@ -147,6 +154,19 @@ main {
     #language-switcher {
         padding: 20px 0;
     }
+
+    #filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #filters label {
+        margin-right: 0;
+    }
+
+    #filters select {
+        width: 100%;
+    }
 }
 
 #sort-options {
@@ -155,7 +175,14 @@ main {
 
 #sort-options label {
     margin-right: 10px;
+
+
+};
+#filters {
+    display: flex;
+    justify-content: first baseline;
 }
+
 
 
 @media (max-width: 480px) {
@@ -196,5 +223,18 @@ main {
     #language-switcher {
         padding: 10px 0;
         font-size: 0.9rem;
+    }
+
+    #filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #filters label {
+        margin-right: 0;
+    }
+
+    #filters select {
+        width: 100%;
     }
 }
