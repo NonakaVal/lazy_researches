@@ -9,6 +9,7 @@ const translations = {
         },
         categoryFilterLabel: "Filter by category:",
         clearFiltersButton: "Clear Filters",
+        searchLabel: "Search:",
         allCategories: "All",
         noArticlesFound: "No articles found."
     },
@@ -17,11 +18,12 @@ const translations = {
         introductionText: "Site criado em 10 minutos para publicar os resultados de algumas pesquisas que fiz usando <a href=\"https://github.com/NonakaVal/lazy_research\">lazy research</a>.",
         sortOrderLabel: "Ordenar por data:",
         sortOptions: {
-            desc: "Mais recentes primeiro",
-            asc: "Mais antigos primeiro"
+            desc: "Mais recentes",
+            asc: "Mais antigos"
         },
         categoryFilterLabel: "Filtrar por categoria:",
         clearFiltersButton: "Limpar Filtros",
+        searchLabel: "Pesquisar:",
         allCategories: "Todas",
         noArticlesFound: "Nenhum artigo encontrado."
     }
@@ -37,56 +39,58 @@ function updateLanguage(language) {
         language = localStorage.getItem('language') || 'en';
     }
 
-    // Atualizar conteúdo da introdução
-    const introductionTitle = document.querySelector('#introduction h1');
-    const introductionText = document.querySelector('#introduction p');
-    
-    if (translations[language]) {
-        introductionTitle.textContent = translations[language].introductionTitle;
-        introductionText.innerHTML = translations[language].introductionText;
-
-        // Atualizar labels e botão dos filtros
-        document.querySelector('#filters label[for="sort-order"]').textContent = translations[language].sortOrderLabel;
-        document.querySelector('#filters label[for="category-filter"]').textContent = translations[language].categoryFilterLabel;
-        document.getElementById('clear-filters').textContent = translations[language].clearFiltersButton;
-
-        // Atualizar opções de classificação
-        const sortOrderElement = document.getElementById('sort-order');
-        sortOrderElement.innerHTML = `
-            <option value="desc">${translations[language].sortOptions.desc}</option>
-            <option value="asc">${translations[language].sortOptions.asc}</option>
-        `;
-    }
-
     const articlesList = document.getElementById('articles-list');
     const sortOrder = document.getElementById('sort-order').value || 'desc';
     const categoryFilter = document.getElementById('category-filter').value || 'all';
+    const searchQuery = document.getElementById('search-query').value.toLowerCase();
+    articlesList.innerHTML = '';
 
-    // Carregar artigos
     fetch(`${language}/index.json`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Error loading articles.');
+                throw new Error('Erro ao carregar os artigos.');
             }
             return response.json();
         })
         .then(articles => {
-            console.log('Loaded articles:', articles); // Debug log
+            if (articles && articles.length > 0) {
+                // Atualizar conteúdo da introdução
+                const introductionTitle = document.querySelector('#introduction h1');
+                const introductionText = document.querySelector('#introduction p');
+                
+                if (translations[language]) {
+                    introductionTitle.textContent = translations[language].introductionTitle;
+                    introductionText.innerHTML = translations[language].introductionText;
 
-            // Preencher o seletor de categorias
-            const categories = [...new Set(articles.map(article => article.category))];
-            const categoryFilterElement = document.getElementById('category-filter');
-            categoryFilterElement.innerHTML = `<option value="all">${translations[language].allCategories}</option>`;
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category;
-                option.textContent = category;
-                categoryFilterElement.appendChild(option);
-            });
+                    // Atualizar labels e botão dos filtros
+                    document.querySelector('#filters label[for="sort-order"]').textContent = translations[language].sortOrderLabel;
+                    document.querySelector('#filters label[for="category-filter"]').textContent = translations[language].categoryFilterLabel;
+                    document.querySelector('#filters label[for="search-query"]').textContent = translations[language].searchLabel;
+                    document.getElementById('clear-filters').textContent = translations[language].clearFiltersButton;
+
+                    // Atualizar opções de ordenação
+                    const sortOrderElement = document.getElementById('sort-order');
+                    sortOrderElement.innerHTML = `
+                        <option value="desc">${translations[language].sortOptions.desc}</option>
+                        <option value="asc">${translations[language].sortOptions.asc}</option>
+                    `;
+                }
+
+                // Preencher seletor de categorias
+                const categories = [...new Set(articles.map(article => article.category))];
+                const categoryFilterElement = document.getElementById('category-filter');
+                categoryFilterElement.innerHTML = `<option value="all">${translations[language].allCategories}</option>`;
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    categoryFilterElement.appendChild(option);
+                });
 
                 // Filtrar e ordenar os artigos
                 const filteredArticles = articles
-                    .filter(article => categoryFilter === 'all' || article.category === categoryFilter)
+                    .filter(article => (categoryFilter === 'all' || article.category === categoryFilter) &&
+                                       (!searchQuery || article.title.toLowerCase().includes(searchQuery)))
                     .sort((a, b) => {
                         const dateA = new Date(a.date);
                         const dateB = new Date(b.date);
@@ -98,27 +102,30 @@ function updateLanguage(language) {
                         }
                     });
 
-            // Limpar e adicionar artigos à lista
-            articlesList.innerHTML = '';
-            filteredArticles.forEach(article => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `${language}/${article.url}`;
-                a.textContent = article.title;
-                li.appendChild(a);
-                articlesList.appendChild(li);
-            });
+                filteredArticles.forEach(article => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `${language}/${article.url}`;
+                    a.textContent = article.title;
+                    li.appendChild(a);
+                    articlesList.appendChild(li);
+                });
 
-            if (filteredArticles.length === 0) {
+                if (filteredArticles.length === 0) {
+                    const li = document.createElement('li');
+                    li.textContent = translations[language].noArticlesFound;
+                    articlesList.appendChild(li);
+                }
+            } else {
                 const li = document.createElement('li');
                 li.textContent = translations[language].noArticlesFound;
                 articlesList.appendChild(li);
             }
         })
         .catch(error => {
-            console.error('Error loading articles:', error);
+            console.error('Erro ao carregar artigos:', error);
             const li = document.createElement('li');
-            li.textContent = "Error loading articles.";
+            li.textContent = "Erro ao carregar os artigos.";
             articlesList.appendChild(li);
         });
 }
@@ -126,9 +133,10 @@ function updateLanguage(language) {
 function clearFilters() {
     document.getElementById('sort-order').value = 'desc';
     document.getElementById('category-filter').value = 'all';
-    updateLanguage();
+    document.getElementById('search-query').value = '';
+    updateLanguage(localStorage.getItem('language') || 'en');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    updateLanguage();
+    updateLanguage(localStorage.getItem('language') || 'en');
 });
