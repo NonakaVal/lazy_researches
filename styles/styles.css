@@ -120,11 +120,21 @@ main {
 
 #filters button {
     margin-top: 10px;
-    padding: 1px 1px;
+    padding: 3px 3px;
     cursor: pointer;
+    margin-left: 2%;
     
+
 }
 
+#sort-options {
+    margin: 20px 0;
+}
+
+#sort-options label {
+    margin-right: 10px;
+
+}
 
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
@@ -156,6 +166,7 @@ main {
 
     #articles-list a {
         font-size: 0.9rem;
+        margin-bottom: 2%;
     }
 
     #language-switcher {
@@ -176,80 +187,8 @@ main {
     }
 
     #filters button {
-        width: 50%;
-    }
-}
-
-#sort-options {
-    margin: 20px 0;
-}
-
-#sort-options label {
-    margin-right: 10px;
-
-
-};
-#filters {
-    display: flex;
-    justify-content: first baseline;
-}
-
-
-
-@media (max-width: 480px) {
-    header {
-        text-align: center;
-        padding: 10px 0;
-    }
-
-    nav ul {
-        text-align: center;
-    }
-
-    nav ul li {
-        display: block;
-        margin: 5px 0;
-    }
-
-    nav ul li a {
-        padding: 5px 0;
-    }
-
-    #introduction h1 {
-        font-size: 1rem;
-    }
-
-    #introduction p {
-        font-size: 0.9rem;
-    }
-
-    #articles h2 {
-        font-size: 1rem;
-    }
-
-    #articles-list a {
-        font-size: 0.9rem;
-    }
-
-    #language-switcher {
-        padding: 10px 0;
-        font-size: 0.9rem;
-    }
-    #filters {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #filters label {
-        margin-right: 0;
-    }
-
-    #filters select {
         width: 100%;
     }
-
-    #filters button {
-        width: 50%;
-    }
-
 }
+
+
