@@ -22,11 +22,12 @@
         <section id="language-switcher">
             <div class="container">
                 <ul class="language-switcher">
-                    <li><a href="#" onclick="changeLanguage('pt')">Português</a></li>
-                    <li><a href="#" onclick="changeLanguage('en')">English</a></li>
+                    <li><a href="#" onclick="changeLanguage('pt'); return false;">Português</a></li>
+                    <li><a href="#" onclick="changeLanguage('en'); return false;">English</a></li>
                 </ul>
             </div>
         </section>
+        
         <section id="filters">
             <div class="container">
                 <label for="sort-order">Ordenar por data:</label>
@@ -42,6 +43,7 @@
                 <button id="clear-filters" onclick="clearFilters()">Limpar Filtros</button>
             </div>
         </section>
+        
         <section id="articles">
             
             <div class="container">

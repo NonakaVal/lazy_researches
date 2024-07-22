@@ -157,7 +157,7 @@ main {
     }
 
     #introduction h1 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     #articles {
@@ -176,6 +176,7 @@ main {
 
     #language-switcher {
         padding: 20px 0;
+        font-size: 0.9rem;
     }
 
     #filters {

@@ -1,0 +1,10 @@
+{
+    "introTitle": "Personal AI Research Repository",
+    "introText": "Site created in 10 minutes to publish the results of some research I did using <a href='https://github.com/NonakaVal/lazy_research'>lazy research</a>.",
+    "sortOrder": {
+        "desc": "Most recent first",
+        "asc": "Oldest first"
+    },
+    "categoryFilter": "All",
+    "clearFilters": "Clear Filters"
+}

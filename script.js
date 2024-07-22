@@ -1,3 +1,32 @@
+const translations = {
+    en: {
+        introductionTitle: "Personal AI Research Repository",
+        introductionText: "Site created in 10 minutes to publish the results of some research I did using <a href=\"https://github.com/NonakaVal/lazy_research\">lazy research</a>.",
+        sortOrderLabel: "Sort by date:",
+        sortOptions: {
+            desc: "Newest first",
+            asc: "Oldest first"
+        },
+        categoryFilterLabel: "Filter by category:",
+        clearFiltersButton: "Clear Filters",
+        allCategories: "All",
+        noArticlesFound: "No articles found."
+    },
+    pt: {
+        introductionTitle: "Repositório pessoal de pesquisas com IA",
+        introductionText: "Site criado em 10 minutos para publicar os resultados de algumas pesquisas que fiz usando <a href=\"https://github.com/NonakaVal/lazy_research\">lazy research</a>.",
+        sortOrderLabel: "Ordenar por data:",
+        sortOptions: {
+            desc: "Mais recentes primeiro",
+            asc: "Mais antigos primeiro"
+        },
+        categoryFilterLabel: "Filtrar por categoria:",
+        clearFiltersButton: "Limpar Filtros",
+        allCategories: "Todas",
+        noArticlesFound: "Nenhum artigo encontrado."
+    }
+};
+
 function changeLanguage(language) {
     localStorage.setItem('language', language);
     updateLanguage(language);
@@ -6,6 +35,31 @@ function changeLanguage(language) {
 function updateLanguage(language) {
     if (!language) {
         language = localStorage.getItem('language') || 'en';
+    }
+
+    // Atualizar conteúdo da introdução
+    const introductionTitle = document.querySelector('#introduction h1');
+    const introductionText = document.querySelector('#introduction p');
+    
+    if (translations[language]) {
+        introductionTitle.textContent = translations[language].introductionTitle;
+        introductionText.innerHTML = translations[language].introductionText;
+
+        // Atualizar labels e botão dos filtros
+        document.querySelector('#filters label[for="sort-order"]').textContent = translations[language].sortOrderLabel;
+        document.querySelector('#filters label[for="category-filter"]').textContent = translations[language].categoryFilterLabel;
+        document.getElementById('clear-filters').textContent = translations[language].clearFiltersButton;
+
+        // Atualizar opções de classificação
+        const sortOrderElement = document.getElementById('sort-order');
+        sortOrderElement.innerHTML = `
+            <option value="desc">${translations[language].sortOptions.desc}</option>
+            <option value="asc">${translations[language].sortOptions.asc}</option>
+        `;
+
+        // Atualizar opções de filtro de categoria
+        const categoryFilterElement = document.getElementById('category-filter');
+        categoryFilterElement.innerHTML = `<option value="all">${translations[language].allCategories}</option>`;
     }
 
     const articlesList = document.getElementById('articles-list');
@@ -25,7 +79,7 @@ function updateLanguage(language) {
                 // Preencher seletor de categorias
                 const categories = [...new Set(articles.map(article => article.category))];
                 const categoryFilterElement = document.getElementById('category-filter');
-                categoryFilterElement.innerHTML = '<option value="all">Todas</option>';
+                categoryFilterElement.innerHTML = `<option value="all">${translations[language].allCategories}</option>`;
                 categories.forEach(category => {
                     const option = document.createElement('option');
                     option.value = category;
@@ -58,12 +112,12 @@ function updateLanguage(language) {
 
                 if (filteredArticles.length === 0) {
                     const li = document.createElement('li');
-                    li.textContent = "Nenhum artigo encontrado.";
+                    li.textContent = translations[language].noArticlesFound;
                     articlesList.appendChild(li);
                 }
             } else {
                 const li = document.createElement('li');
-                li.textContent = "Nenhum artigo encontrado.";
+                li.textContent = translations[language].noArticlesFound;
                 articlesList.appendChild(li);
             }
         })
