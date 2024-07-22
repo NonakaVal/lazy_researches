@@ -56,36 +56,33 @@ function updateLanguage(language) {
             <option value="desc">${translations[language].sortOptions.desc}</option>
             <option value="asc">${translations[language].sortOptions.asc}</option>
         `;
-
-        // Atualizar opções de filtro de categoria
-        const categoryFilterElement = document.getElementById('category-filter');
-        categoryFilterElement.innerHTML = `<option value="all">${translations[language].allCategories}</option>`;
     }
 
     const articlesList = document.getElementById('articles-list');
     const sortOrder = document.getElementById('sort-order').value || 'desc';
     const categoryFilter = document.getElementById('category-filter').value || 'all';
-    articlesList.innerHTML = '';
 
-    fetch(`${language}/index.json`) // Carrega o arquivo index.json do idioma selecionado
+    // Carregar artigos
+    fetch(`${language}/index.json`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Erro ao carregar os artigos.');
+                throw new Error('Error loading articles.');
             }
             return response.json();
         })
         .then(articles => {
-            if (articles && articles.length > 0) {
-                // Preencher seletor de categorias
-                const categories = [...new Set(articles.map(article => article.category))];
-                const categoryFilterElement = document.getElementById('category-filter');
-                categoryFilterElement.innerHTML = `<option value="all">${translations[language].allCategories}</option>`;
-                categories.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category;
-                    option.textContent = category;
-                    categoryFilterElement.appendChild(option);
-                });
+            console.log('Loaded articles:', articles); // Debug log
+
+            // Preencher o seletor de categorias
+            const categories = [...new Set(articles.map(article => article.category))];
+            const categoryFilterElement = document.getElementById('category-filter');
+            categoryFilterElement.innerHTML = `<option value="all">${translations[language].allCategories}</option>`;
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categoryFilterElement.appendChild(option);
+            });
 
                 // Filtrar e ordenar os artigos
                 const filteredArticles = articles
@@ -101,30 +98,27 @@ function updateLanguage(language) {
                         }
                     });
 
-                filteredArticles.forEach(article => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = `${language}/${article.url}`;
-                    a.textContent = article.title;
-                    li.appendChild(a);
-                    articlesList.appendChild(li);
-                });
+            // Limpar e adicionar artigos à lista
+            articlesList.innerHTML = '';
+            filteredArticles.forEach(article => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `${language}/${article.url}`;
+                a.textContent = article.title;
+                li.appendChild(a);
+                articlesList.appendChild(li);
+            });
 
-                if (filteredArticles.length === 0) {
-                    const li = document.createElement('li');
-                    li.textContent = translations[language].noArticlesFound;
-                    articlesList.appendChild(li);
-                }
-            } else {
+            if (filteredArticles.length === 0) {
                 const li = document.createElement('li');
                 li.textContent = translations[language].noArticlesFound;
                 articlesList.appendChild(li);
             }
         })
         .catch(error => {
-            console.error('Erro ao carregar artigos:', error);
+            console.error('Error loading articles:', error);
             const li = document.createElement('li');
-            li.textContent = "Erro ao carregar os artigos.";
+            li.textContent = "Error loading articles.";
             articlesList.appendChild(li);
         });
 }
