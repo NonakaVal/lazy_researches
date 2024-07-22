@@ -99,7 +99,18 @@ main {
 
 #articles-list a:hover {
     background-color: #d6d2d2;
+
+
 }
+
+#filters {
+    margin: 20px 0;
+}
+
+#filters label {
+    margin-right: 10px;
+}
+
 
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
@@ -137,6 +148,15 @@ main {
         padding: 20px 0;
     }
 }
+
+#sort-options {
+    margin: 20px 0;
+}
+
+#sort-options label {
+    margin-right: 10px;
+}
+
 
 @media (max-width: 480px) {
     header {
