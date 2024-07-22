@@ -9,6 +9,7 @@ const translations = {
         },
         categoryFilterLabel: "Filter by category:",
         clearFiltersButton: "Clear Filters",
+        searchLabel: "Search:",
         allCategories: "All",
         noArticlesFound: "No articles found."
     },
@@ -17,11 +18,12 @@ const translations = {
         introductionText: "Site criado em 10 minutos para publicar os resultados de algumas pesquisas que fiz usando <a href=\"https://github.com/NonakaVal/lazy_research\">lazy research</a>.",
         sortOrderLabel: "Ordenar por data:",
         sortOptions: {
-            desc: "Mais recentes primeiro",
-            asc: "Mais antigos primeiro"
+            desc: "Mais recentes",
+            asc: "Mais antigos"
         },
         categoryFilterLabel: "Filtrar por categoria:",
         clearFiltersButton: "Limpar Filtros",
+        searchLabel: "Pesquisar:",
         allCategories: "Todas",
         noArticlesFound: "Nenhum artigo encontrado."
     }
@@ -40,6 +42,7 @@ function updateLanguage(language) {
     const articlesList = document.getElementById('articles-list');
     const sortOrder = document.getElementById('sort-order').value || 'desc';
     const categoryFilter = document.getElementById('category-filter').value || 'all';
+    const searchQuery = document.getElementById('search-query').value.toLowerCase();
     articlesList.innerHTML = '';
 
     fetch(`${language}/index.json`)
@@ -62,6 +65,7 @@ function updateLanguage(language) {
                     // Atualizar labels e botão dos filtros
                     document.querySelector('#filters label[for="sort-order"]').textContent = translations[language].sortOrderLabel;
                     document.querySelector('#filters label[for="category-filter"]').textContent = translations[language].categoryFilterLabel;
+                    document.querySelector('#filters label[for="search-query"]').textContent = translations[language].searchLabel;
                     document.getElementById('clear-filters').textContent = translations[language].clearFiltersButton;
 
                     // Atualizar opções de ordenação
@@ -85,7 +89,8 @@ function updateLanguage(language) {
 
                 // Filtrar e ordenar os artigos
                 const filteredArticles = articles
-                    .filter(article => categoryFilter === 'all' || article.category === categoryFilter)
+                    .filter(article => (categoryFilter === 'all' || article.category === categoryFilter) &&
+                                       (!searchQuery || article.title.toLowerCase().includes(searchQuery)))
                     .sort((a, b) => {
                         const dateA = new Date(a.date);
                         const dateB = new Date(b.date);
@@ -128,6 +133,7 @@ function updateLanguage(language) {
 function clearFilters() {
     document.getElementById('sort-order').value = 'desc';
     document.getElementById('category-filter').value = 'all';
+    document.getElementById('search-query').value = '';
     updateLanguage(localStorage.getItem('language') || 'en');
 }
 

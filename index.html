@@ -30,22 +30,29 @@
         
         <section id="filters">
             <div class="container">
-                <label for="sort-order">Ordenar por data:</label>
-                <select id="sort-order" onchange="updateLanguage()">
-                    <option value="desc">Mais recentes primeiro</option>
-                    <option value="asc">Mais antigos primeiro</option>
-                </select>
+                <label for="search-query">Pesquisar:</label>
+                <input type="text" id="search-query" oninput="updateLanguage()">
                 <label for="category-filter">Filtrar por categoria:</label>
                 <select id="category-filter" onchange="updateLanguage()">
                     <option value="all">Todas</option>
+                    <!-- As opções de categoria serão preenchidas dinamicamente -->
+                </select>
+                <label for="sort-order">Ordenar por data:</label>
+                <select id="sort-order" onchange="updateLanguage()">
+                    <option value="desc">Mais recentes</option>
+                    <option value="asc">Mais antigos</option>
                 </select>
                 <button id="clear-filters" onclick="clearFilters()">Limpar Filtros</button>
+
             </div>
         </section>
         
         <section id="articles">
+  
             <div class="container">
+                <h2>Researches</h2>
                 <ul id="articles-list">
+                    
                     <!-- Os links para os artigos serão gerados dinamicamente via script -->
                 </ul>
             </div>

@@ -1,6 +1,7 @@
-/* Reset básico */
+/* Importação das fontes */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -33,7 +34,7 @@ nav ul {
     text-align: center;
 }
 
-/* Language switcher styles */
+/* Estilos para o alternador de idioma */
 #language-switcher {
     background-color: #f0f0f0;
     padding: 10px 0;
@@ -66,7 +67,7 @@ main {
 
 #introduction {
     background-color: #f0f0f0;
-    padding: 5px 0;
+    padding: 20px 0;
     text-align: left;
 }
 
@@ -80,13 +81,12 @@ main {
     margin-top: -3%;
 }
 
-
 #articles-list {
-    list-style-type:disc;
+    list-style-type: disc;
 }
 
 #articles-list li {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 #articles-list a {
@@ -99,8 +99,6 @@ main {
 
 #articles-list a:hover {
     background-color: #d6d2d2;
-
-
 }
 
 #filters {
@@ -108,23 +106,25 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    align-items: center;
 }
 
 #filters label {
     margin-right: 10px;
 }
 
-#filters select {
+#filters select, #filters input {
     margin-bottom: 10px;
+    padding: 5px;
+    font-size: 1rem;
 }
 
 #filters button {
     margin-top: 10px;
-    padding: 3px 3px;
+    padding: 5px 10px;
     cursor: pointer;
     margin-left: 2%;
-    
-
+    font-size: 1rem;
 }
 
 #sort-options {
@@ -133,7 +133,6 @@ main {
 
 #sort-options label {
     margin-right: 10px;
-
 }
 
 /* Responsividade para telas menores */
@@ -171,7 +170,6 @@ main {
     #articles-list a {
         font-size: 0.9rem;
         margin-bottom: 2%;
-        
     }
 
     #language-switcher {
@@ -182,20 +180,19 @@ main {
     #filters {
         flex-direction: column;
         align-items: flex-start;
+        font-size: 0.9rem;
     }
 
     #filters label {
         margin-right: 0;
     }
 
-    #filters select {
+    #filters select, #filters input {
         width: 100%;
+        font-size: 0.8rem;
     }
 
     #filters button {
         width: 100%;
-
     }
 }
-
-
