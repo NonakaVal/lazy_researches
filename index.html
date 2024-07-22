@@ -29,17 +29,17 @@
         </section>
         <section id="filters">
             <div class="container">
-                <label for="category-filter">Filtrar por categoria:</label>
-                <select id="category-filter" onchange="updateLanguage()">
-                    <option value="all">Todas</option>
-                    <!-- As opções de categoria serão preenchidas dinamicamente -->
-                </select>
                 <label for="sort-order">Ordenar por data:</label>
                 <select id="sort-order" onchange="updateLanguage()">
                     <option value="desc">Mais recentes primeiro</option>
                     <option value="asc">Mais antigos primeiro</option>
                 </select>
-
+                <label for="category-filter">Filtrar por categoria:</label>
+                <select id="category-filter" onchange="updateLanguage()">
+                    <option value="all">Todas</option>
+                    <!-- As opções de categoria serão preenchidas dinamicamente -->
+                </select>
+                <button id="clear-filters" onclick="clearFilters()">Limpar Filtros</button>
             </div>
         </section>
         <section id="articles">

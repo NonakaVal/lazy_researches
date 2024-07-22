@@ -118,6 +118,13 @@ main {
     margin-bottom: 10px;
 }
 
+#filters button {
+    margin-top: 10px;
+    padding: 1px 1px;
+    cursor: pointer;
+    
+}
+
 
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
@@ -166,6 +173,10 @@ main {
 
     #filters select {
         width: 100%;
+    }
+
+    #filters button {
+        width: 50%;
     }
 }
 
@@ -224,7 +235,6 @@ main {
         padding: 10px 0;
         font-size: 0.9rem;
     }
-
     #filters {
         flex-direction: column;
         align-items: flex-start;
@@ -237,4 +247,9 @@ main {
     #filters select {
         width: 100%;
     }
+
+    #filters button {
+        width: 50%;
+    }
+
 }

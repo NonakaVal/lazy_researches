@@ -75,6 +75,12 @@ function updateLanguage(language) {
         });
 }
 
+function clearFilters() {
+    document.getElementById('sort-order').value = 'desc';
+    document.getElementById('category-filter').value = 'all';
+    updateLanguage();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updateLanguage();
 });
