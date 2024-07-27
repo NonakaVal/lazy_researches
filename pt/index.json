@@ -43,7 +43,14 @@
     {
       "title": "Relatório Detalhado: Mercado de Tecnologia e Venda de Acessórios e Dispositivos Eletrônicos Varejo (23-07-2024)",
       "url": "verejo-tec.html",
-      "date": "2024-07-23",
+      "date": "2024-07-24",
+      "category": "mercado"
+    }
+    ,
+    {
+      "title": "Pesquisa Mercado de Serviços de Consultoria e Venda de Consultoria de Ciência de Dado #1 (27-07-2024)",
+      "url": "Consultoria1.html",
+      "date": "2024-07-27",
       "category": "mercado"
     }
   ]
